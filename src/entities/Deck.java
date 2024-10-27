@@ -41,7 +41,7 @@ public class Deck {
 
 	public String[] manilha(String vira) {
 		String manilha = "";
-		switch(vira) {
+		switch (vira) {
 		case "As":
 			manilha = "Dois";
 			break;
@@ -73,9 +73,10 @@ public class Deck {
 			manilha = "As";
 			break;
 		}
-		return new String[] {manilha + " de Copas", manilha + " de Ouro", manilha + " de Paus", manilha + "de Espadas" };
+		return new String[] { manilha + " de Copas", manilha + " de Ouro", manilha + " de Paus",
+				manilha + "de Espadas" };
 	}
-	
+
 	public List<Card> Mao(int num) {
 		List<Card> mao = new ArrayList<>();
 		for (int i = 0; i < num; i++) {
@@ -133,4 +134,23 @@ public class Deck {
 		return cardValue;
 	}
 
+	public int manilhaValue(Card card, String[] manilha) {
+		int cardValue = 0;
+		String suits = card.toString().split(" ")[0];
+
+		switch (suits) {
+		case "Copas":
+			cardValue = 90;
+			break;
+		case "Ouro":
+			cardValue = 80;
+		case "Paus":
+			cardValue = 100;
+		case "Espadas":
+			cardValue = 70;
+			break;
+		}
+
+		return cardValue;
+	}
 }

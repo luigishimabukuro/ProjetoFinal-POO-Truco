@@ -88,6 +88,14 @@ public class Truco {
 			bot1.receberCartas(maodoBot1);
 			List<Card> maodoBot2 = deck.Mao(3);
 			bot2.receberCartas(maodoBot2);
+			vira = deck.getVira();
+			System.out.println("\tO vira é " + vira);
+			String[] manilhas = deck.manilha(vira.split(" ")[0]);
+
+			System.out.println("As manilhas são:");
+			for (String manilha : manilhas) {
+				System.out.println(manilha);
+			}
 
 		}
 	}
