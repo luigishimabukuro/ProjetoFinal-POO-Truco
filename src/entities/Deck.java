@@ -144,8 +144,10 @@ public class Deck {
 			break;
 		case "Ouro":
 			cardValue = 80;
+			break;
 		case "Paus":
 			cardValue = 100;
+			break;
 		case "Espadas":
 			cardValue = 70;
 			break;
