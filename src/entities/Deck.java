@@ -21,6 +21,17 @@ public class Deck {
 			deck[count] = new Card(faces[count % 10], suits[count / 10]);
 	}
 
+	public void reset() {
+		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
+		String[] suits = { "Copas", "Ouro", "Paus", "Espadas" };
+		for (int count = 0; count < deck.length; count++) {
+			deck[count] = new Card(faces[count % 10], suits[count / 10]);
+		}
+		currentCard = 0;
+		vira = null;
+		shuffle();
+	}
+
 	public void shuffle() {
 		currentCard = 0;
 
@@ -92,67 +103,69 @@ public class Deck {
 			return null;
 	}
 
-	public int getCardValue(Card card, int currentScore) {
-		String face = card.toString().split(" ")[0];
-		int cardValue;
+	public int getCardValue(Card card) {
+		String[] parts = card.toString().split(" de ");
+		String face = parts[0];
+		String suit = parts[1];
+
+		int faceValue;
+		int suitValue = 0;
 
 		switch (face) {
 		case "As":
-			cardValue = 8;
+			faceValue = 8;
 			break;
 		case "Dois":
-			cardValue = 9;
+			faceValue = 9;
 			break;
 		case "Tres":
-			cardValue = 10;
+			faceValue = 10;
 			break;
 		case "Quatro":
-			cardValue = 1;
+			faceValue = 1;
 			break;
 		case "Cinco":
-			cardValue = 2;
+			faceValue = 2;
 			break;
 		case "Seis":
-			cardValue = 3;
+			faceValue = 3;
 			break;
 		case "Sete":
-			cardValue = 4;
-			break;
-		case "Valete":
-			cardValue = 6;
+			faceValue = 4;
 			break;
 		case "Dama":
-			cardValue = 5;
+			faceValue = 5;
+			break;
+		case "Valete":
+			faceValue = 6;
 			break;
 		case "Rei":
-			cardValue = 7;
+			faceValue = 7;
 			break;
 		default:
-			cardValue = 0;
-			break;
-		}
-		return cardValue;
-	}
-
-	public int manilhaValue(Card card, String[] manilha) {
-		int cardValue = 0;
-		String suits = card.toString().split(" ")[0];
-
-		switch (suits) {
-		case "Copas":
-			cardValue = 90;
-			break;
-		case "Ouro":
-			cardValue = 80;
-			break;
-		case "Paus":
-			cardValue = 100;
-			break;
-		case "Espadas":
-			cardValue = 70;
+			faceValue = 0;
 			break;
 		}
 
-		return cardValue;
+		if (face.equals(vira)) {
+			switch (suit) {
+			case "Copas":
+				suitValue = 10;
+				break;
+			case "Ouro":
+				suitValue = 20;
+				break;
+			case "Paus":
+				suitValue = 30;
+				break;
+			case "Espadas":
+				suitValue = 40;
+				break;
+			default:
+				suitValue = 0;
+				break;
+			}
+		}
+		return faceValue + suitValue;
 	}
 }
