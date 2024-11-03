@@ -32,7 +32,14 @@ public class Bot extends Deck {
 
 	public boolean aceitarTruco() {
 		SecureRandom random = new SecureRandom();
-		return random.nextBoolean();
+		boolean resp = random.nextBoolean();
+		if(resp) {
+			System.out.println("O Bot aceitou o truco!!");
+		}
+		else {
+			System.out.println("O Bot não aceitou o truco!!");
+		}
+		return resp;
 	}
 
 	public int jogarCarta(List<Card> maodoBot) {

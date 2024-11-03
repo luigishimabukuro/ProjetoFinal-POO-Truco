@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player extends Deck {
-	private int score;
 	private List<Card> mao;
 
 	public Player(String name) {
@@ -48,8 +47,35 @@ public class Player extends Deck {
 		return valor;
 	}
 
-	public int getScore() {
-		return score;
+	public boolean truco(Scanner scanner) {
+		char resp;
+		boolean truco = false;
+		do {
+			System.out.println("Deseja trucar? (s/n): ");
+			resp = scanner.nextLine().charAt(0);
+			if (resp == 's') {
+				truco = true;
+			} else if (resp == 'n') {
+				truco = false;
+			}
+		} while (resp != 's' && resp != 'n');
+		return truco;
+	}
+
+	public boolean aceitarTruco(Scanner scanner) {
+		boolean aceitar = false;
+		char resp = 0;
+		do {
+			System.out.println("Aceita o truco?");
+			resp = scanner.nextLine().charAt(0);
+			if(resp == 's') {
+				aceitar = true;
+			}else if(resp == 'n') {
+				aceitar = false;
+			}
+		} while (resp != 's' && resp != 'n');
+
+		return aceitar;
 	}
 
 	public List<Card> getMao() {
