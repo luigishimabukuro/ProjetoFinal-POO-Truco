@@ -45,6 +45,7 @@ public class Truco {
 			Bot bot3 = new Bot();
 			do {
 				distribuirCartas1(deck, jogador1, bot1, bot2, bot3);
+				jogador1.mostraraMao(jogador1.getMao());
 				System.out.println("\n\tO vira é: " + vira);
 				String[] manilhas = deck.manilha(vira.split(" ")[0]);
 
@@ -53,25 +54,25 @@ public class Truco {
 				boolean truco = jogador1.truco(sc);
 				if (truco && bot1.aceitarTruco()) {
 					do {
-						realizarRodada(jogador1, bot1, bot2, bot3, sc);
+						realizarRodada1(jogador1, bot1, bot2, bot3, sc);
 					} while (rodada1 < 2 && rodada2 < 2);
 
 					if (rodada1 == 2) {
 						pontuacao1 += 3;
-						System.out.println("\n\tO time 1 ganhou a rodada!");
+						System.out.println("\n\tO time 1 ganhou o truco! 3 pontos para o time 1!");
 					} else if (rodada2 == 2) {
 						pontuacao2 += 3;
-						System.out.println("\n\tO time 2 ganhou a rodada!");
+						System.out.println("\n\tO time 2 ganhou o truco! 3 pontos para o time 2!");
 					}
-					resetarRodada(deck, jogador1, bot1, bot2, bot3);
+					resetarRodada1(deck, jogador1, bot1, bot2, bot3);
 
 				} else if (truco && !bot1.aceitarTruco()) {
 					pontuacao1 += 1;
 					System.out.println("\n\tO time 1 ganhou a rodada!");
-					resetarRodada(deck, jogador1, bot1, bot2, bot3);
+					resetarRodada1(deck, jogador1, bot1, bot2, bot3);
 				} else {
 					do {
-						realizarRodada(jogador1, bot1, bot2, bot3, sc);
+						realizarRodada1(jogador1, bot1, bot2, bot3, sc);
 					} while (rodada1 < 2 && rodada2 < 2);
 
 					if (rodada1 == 2) {
@@ -81,7 +82,7 @@ public class Truco {
 						pontuacao2++;
 						System.out.println("\n\tO time 2 ganhou um ponto!");
 					}
-					resetarRodada(deck, jogador1, bot1, bot2, bot3);
+					resetarRodada1(deck, jogador1, bot1, bot2, bot3);
 				}
 
 				System.out.println("Pontuação atual: \n\tTime 1: " + pontuacao1 + "\n\tTime 2: " + pontuacao2);
@@ -120,34 +121,65 @@ public class Truco {
 
 	static int pontos = 0;
 
-	public static void realizarRodada(Player jogador1, Bot bot1, Bot bot2, Bot bot3, Scanner sc) {
+	static int pontoempate = 0;
+	static int primeirovencedor;
+
+	public static void realizarRodada1(Player jogador1, Bot bot1, Bot bot2, Bot bot3, Scanner sc) {
 		int resultadoPlayer = jogador1.playerTurn(jogador1.getMao(), sc);
 		int resultadoBot1 = bot1.jogarCarta(bot1.getMaodobot());
 		int resultadoBot2 = bot2.jogarCarta(bot2.getMaodobot());
 		int resultadoBot3 = bot3.jogarCarta(bot3.getMaodobot());
 
-		int pontosTime1 = resultadoPlayer + resultadoBot2;
-		int pontosTime2 = resultadoBot1 + resultadoBot3;
+		int maiorCartaTime1 = Math.max(resultadoPlayer, resultadoBot2);
+		int maiorCartaTime2 = Math.max(resultadoBot1, resultadoBot3);
 
-		if (pontosTime1 > pontosTime2) {
+		if (rodada1 + rodada2 == 0) {
+			if (maiorCartaTime1 > maiorCartaTime2) {
+				primeirovencedor = 1;
+			} else if (maiorCartaTime1 < maiorCartaTime2) {
+				primeirovencedor = 2;
+			}
+		}
+
+		if (maiorCartaTime1 > maiorCartaTime2) {
 			rodada1++;
+			pontuacao1 += pontos + pontoempate;
+			pontoempate = 0;
 			System.out.println("\n\tO time 1 ganhou a rodada!");
-			pontuacao1 += pontos;
 
-		} else if (pontosTime1 < pontosTime2) {
+		} else if (maiorCartaTime1 < maiorCartaTime2) {
 			rodada2++;
+			pontuacao2 += pontos + pontoempate;
+			pontoempate = 0;
 			System.out.println("\n\tO time 2 ganhou a rodada!");
-			pontuacao2 += pontos;
 
 		} else {
-			System.out.println("\n\tA rodada foi empate! O ponto acumula para a próxima rodada.");
-			pontos += 1;
+			System.out.println("\n\tA rodada foi empate!");
+			pontoempate += 1;
+
+			if (rodada1 + rodada2 == 2) {
+				if (primeirovencedor == 1) {
+					rodada1 = 2;
+					System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
+				} else if (primeirovencedor == 2) {
+					rodada2 = 2;
+					System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
+				}
+				pontoempate = 0;
+			}
 		}
 	}
 
-	public static void resetarRodada(Deck deck, Player jogador1, Bot bot1, Bot bot2, Bot bot3) {
+	public static void resetarRodada1(Deck deck, Player jogador1, Bot bot1, Bot bot2, Bot bot3) {
 		deck.reset();
 		distribuirCartas1(deck, jogador1, bot1, bot2, bot3);
+		rodada1 = 0;
+		rodada2 = 0;
+	}
+
+	public static void resetarRodada2(Deck deck, Player jogador1, Bot bot1, Player jogador2, Bot bot3) {
+		deck.reset();
+		distribuirCartas2(deck, jogador1, bot1, jogador2, bot3);
 		rodada1 = 0;
 		rodada2 = 0;
 		System.out.println("\n\tO vira é: " + vira);
