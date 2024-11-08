@@ -257,6 +257,7 @@ public class Truco {
 			}
 		}
 	}
+
 	public static void realizarRodada2(Player jogador1, Bot bot1, Player jogador2, Bot bot3, Scanner sc) {
 		int pontosRodada = 1;
 		boolean trucoAtivo = false;
@@ -292,6 +293,7 @@ public class Truco {
 
 					pontosRodada = 3;
 					System.out.println("\n\tTruco!!!");
+					jogador2.mostraraMao(jogador2.getMao());
 					aceitaTruco = jogador2.aceitarTruco(sc);
 					if (!aceitaTruco) {
 						System.out.println("\n\tO Bot recusou o truco. Time 2 ganha a rodada.");
@@ -379,6 +381,7 @@ public class Truco {
 			}
 		}
 	}
+
 	public static void resetarRodada1(Deck deck, Player jogador1, Bot bot1, Bot bot2, Bot bot3) {
 		deck.reset();
 		distribuirCartas1(deck, jogador1, bot1, bot2, bot3);

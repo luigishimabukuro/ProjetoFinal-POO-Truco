@@ -43,7 +43,6 @@ public class Player extends Deck {
 		System.out.println("\n\tVocê jogou: " + cartaEscolhida.toString());
 
 		int valor = getCardValue(cartaEscolhida);
-		System.out.println("\n\tValor da carta: " + valor);
 		return valor;
 	}
 
