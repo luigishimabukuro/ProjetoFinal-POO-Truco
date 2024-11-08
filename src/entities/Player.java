@@ -16,21 +16,21 @@ public class Player extends Deck {
 	}
 
 	public void mostraraMao(List<Card> mao) {
-		System.out.println("\n\tMão do jogador:");
+		System.out.println("\n\n\tMão do jogador:");
 		for (Card carta : mao) {
-			System.out.println(carta);
+			System.out.println("\n\t-" + carta);
 		}
 	}
 
 	public int playerTurn(List<Card> mao, Scanner sc) {
 		System.out.println("\n\tCartas na mão:");
 		for (int i = 0; i < mao.size(); i++) {
-			System.out.printf("%d: %s\t\n", i + 1, mao.get(i).toString());
+			System.out.printf("\t%d: %s\t\n", i + 1, mao.get(i).toString());
 		}
 
 		int pos;
 		do {
-			System.out.printf("\n\tQual carta deseja jogar? (Escolha o número da carta): ");
+			System.out.printf("\n\tQual carta deseja jogar? ");
 			pos = sc.nextInt();
 			sc.nextLine();
 
@@ -43,7 +43,7 @@ public class Player extends Deck {
 		System.out.println("\n\tVocê jogou: " + cartaEscolhida.toString());
 
 		int valor = getCardValue(cartaEscolhida);
-		System.out.println("\n\tValor da carta:" + valor);
+		System.out.println("\n\tValor da carta: " + valor);
 		return valor;
 	}
 
@@ -51,7 +51,7 @@ public class Player extends Deck {
 		char resp;
 		boolean truco = false;
 		do {
-			System.out.println("Deseja trucar? (s/n): ");
+			System.out.printf("\n\tDeseja trucar? (s/n): ");
 			resp = scanner.nextLine().charAt(0);
 			if (resp == 's') {
 				truco = true;
@@ -66,11 +66,11 @@ public class Player extends Deck {
 		boolean aceitar = false;
 		char resp = 0;
 		do {
-			System.out.println("Aceita o truco?");
+			System.out.println("\n\tAceita o truco?");
 			resp = scanner.nextLine().charAt(0);
-			if(resp == 's') {
+			if (resp == 's') {
 				aceitar = true;
-			}else if(resp == 'n') {
+			} else if (resp == 'n') {
 				aceitar = false;
 			}
 		} while (resp != 's' && resp != 'n');

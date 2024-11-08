@@ -50,7 +50,7 @@ public class Deck {
 		return vira;
 	}
 
-	public String[] manilha(String vira) {
+	public String manilha(String vira) {
 		String manilha = "";
 		switch (vira) {
 		case "As":
@@ -84,8 +84,7 @@ public class Deck {
 			manilha = "As";
 			break;
 		}
-		return new String[] { manilha + " de Copas", manilha + " de Ouro", manilha + " de Paus",
-				manilha + "de Espadas" };
+		return manilha;
 	}
 
 	public List<Card> Mao(int num) {
@@ -107,6 +106,7 @@ public class Deck {
 		String[] parts = card.toString().split(" de ");
 		String face = parts[0];
 		String suit = parts[1];
+		String manilhaFace = manilha(getVira());
 
 		int faceValue;
 		int suitValue = 0;
@@ -147,7 +147,7 @@ public class Deck {
 			break;
 		}
 
-		if (face.equals(vira)) {
+		if (face.equals(manilhaFace)) {
 			switch (suit) {
 			case "Copas":
 				suitValue = 10;
@@ -168,4 +168,5 @@ public class Deck {
 		}
 		return faceValue + suitValue;
 	}
+
 }
