@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class Player extends Deck {
 	private List<Card> mao;
+	public String name;
 
-	public Player(String name) {
+	public Player(String mao) {
 		this.setMao(new ArrayList<>());
 	}
 
@@ -43,6 +44,7 @@ public class Player extends Deck {
 		System.out.println("\n\tVocê jogou: " + cartaEscolhida.toString());
 
 		int valor = getCardValue(cartaEscolhida);
+		System.out.println("\n\tValor da carta:" + valor);
 		return valor;
 	}
 

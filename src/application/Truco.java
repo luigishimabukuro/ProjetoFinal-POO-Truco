@@ -14,6 +14,7 @@ public class Truco {
 	static int pontuacao2 = 0;
 	static int rodada1 = 0;
 	static int rodada2 = 0;
+	static int rodadas = 0;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -74,6 +75,8 @@ public class Truco {
 			} else {
 				System.out.println("\n\tTime 2 venceu o jogo!");
 			}
+			pontuacao1 = 0;
+			pontuacao2 = 0;
 		} else if (jog == 2) {
 			Player jogador1 = new Player("Jogador 1");
 			Bot bot1 = new Bot();
@@ -93,6 +96,7 @@ public class Truco {
 
 				rodada1 = 0;
 				rodada2 = 0;
+				rodadas = 0;
 
 				while (rodada1 < 2 && rodada2 < 2) {
 					realizarRodada2(jogador1, bot1, jogador2, bot3, sc);
@@ -132,7 +136,7 @@ public class Truco {
 	}
 
 	static int pontos = 0;
-	static int pontoempate = 0;
+	static int pontoEmpate = 0;
 	static int primeirovencedor;
 
 	public static void realizarRodada1(Player jogador1, Bot bot1, Bot bot2, Bot bot3, Scanner sc) {
@@ -140,7 +144,7 @@ public class Truco {
 		boolean trucoAtivo = false;
 		boolean pedidodeTruco = false;
 		boolean aceitaTruco = false;
-		int pontoempate = 0;
+		int pontoEmpate = 0;
 		int primeirovencedor = 0;
 
 		while (rodada1 < 2 && rodada2 < 2) {
@@ -154,7 +158,7 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = bot1.aceitarTruco();
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Bot recusou o truco. Time 1 ganha a rodada.");
+						System.out.println("\n\tO Bot recusou o truco. O time 1 ganha a rodada.");
 						rodada1 = 2;
 						pontuacao1 += 1;
 						return;
@@ -172,9 +176,10 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = bot2.aceitarTruco();
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Bot recusou o truco. Time 2 ganha a rodada.");
+						System.out.println("\n\tO Bot recusou o truco. O time 2 ganha a rodada.");
 						rodada2 = 2;
 						pontuacao2 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
@@ -189,9 +194,10 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = bot3.aceitarTruco();
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Bot recusou o truco. Time 1 ganha a rodada.");
+						System.out.println("\n\tO Bot recusou o truco. O time 1 ganha a rodada.");
 						rodada1 = 2;
 						pontuacao1 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
@@ -206,9 +212,10 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = jogador1.aceitarTruco(sc);
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Jogador recusou o truco. Time 2 ganha a rodada.");
+						System.out.println("\n\tO Jogador recusou o truco. O time 2 ganha a rodada.");
 						rodada2 = 2;
 						pontuacao2 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
@@ -218,7 +225,8 @@ public class Truco {
 			int maiorCartaTime1 = Math.max(resultadoPlayer, resultadoBot2);
 			int maiorCartaTime2 = Math.max(resultadoBot1, resultadoBot3);
 
-			if (rodada1 + rodada2 == 0) {
+			if (rodadas < 1) {
+				// System.out.println("\n\tEntrei no primeiro vencedor.");
 				if (maiorCartaTime1 > maiorCartaTime2) {
 					primeirovencedor = 1;
 				} else if (maiorCartaTime1 < maiorCartaTime2) {
@@ -227,26 +235,64 @@ public class Truco {
 			}
 
 			if (maiorCartaTime1 > maiorCartaTime2) {
+				rodadas++;
 				rodada1++;
 				System.out.println("\n\tO time 1 ganhou a rodada!");
 			} else if (maiorCartaTime1 < maiorCartaTime2) {
 				rodada2++;
+				rodadas++;
 				System.out.println("\n\tO time 2 ganhou a rodada!");
-			} else {
-				System.out.println("\n\tA rodada foi empate!");
-				pontoempate++;
+			} else if (maiorCartaTime1 == maiorCartaTime2) {
+				System.out.println("\n\tA rodada melou!");
+				pontoEmpate++;
+				rodadas++;
+			}
 
-				if (rodada1 + rodada2 == 2) {
-					if (primeirovencedor == 1) {
+			if (rodadas == 3 && pontoEmpate == 1) {
+				// System.out.println("\n\tEntrei caso tenham empatado 1 rodada.");
+				if (primeirovencedor == 1) {
+					if (trucoAtivo) {
 						rodada1 = 2;
 						System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
-						pontuacao1 += pontoempate;
-					} else if (primeirovencedor == 2) {
+						pontuacao1 += pontosRodada;
+
+					} else {
+						rodada1 = 2;
+						System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
+						pontuacao1 += pontoEmpate;
+
+					}
+				} else if (primeirovencedor == 2) {
+					if (trucoAtivo) {
 						rodada2 = 2;
 						System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
-						pontuacao1 += pontoempate;
+						pontuacao2 += pontosRodada;
+
+					} else {
+						rodada2 = 2;
+						System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
+						pontuacao2 += pontoEmpate;
+
 					}
-					pontoempate = 0;
+				}
+
+				if (pontoEmpate == 3 && rodadas == 3) {
+					// System.out.println("\n\tEntrei caso tenham empatado 3 rodadas");
+					System.out.println("A rodada interia melou, ninguém recebe ponto.");
+				}
+			}
+
+			if (rodadas == 2 && pontoEmpate == 1) {
+				// System.out.println("\n\tEntrei caso o primeiroVencedor tenha empatado na
+				// segunda rodada.");
+				if (primeirovencedor == 1) {
+					rodada1 = 2;
+					System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
+
+				} else if (primeirovencedor == 2) {
+					rodada2 = 2;
+					System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
+
 				}
 			}
 
@@ -256,6 +302,9 @@ public class Truco {
 				pontuacao2 += pontosRodada;
 			}
 		}
+		rodadas = 0;
+		pontoEmpate = 0;
+		return;
 	}
 
 	public static void realizarRodada2(Player jogador1, Bot bot1, Player jogador2, Bot bot3, Scanner sc) {
@@ -263,7 +312,7 @@ public class Truco {
 		boolean trucoAtivo = false;
 		boolean pedidodeTruco = false;
 		boolean aceitaTruco = false;
-		int pontoempate = 0;
+		int pontoEmpate = 0;
 		int primeirovencedor = 0;
 
 		while (rodada1 < 2 && rodada2 < 2) {
@@ -286,7 +335,7 @@ public class Truco {
 				}
 
 			}
-			int resultadoPlayer = jogador1.playerTurn(jogador1.getMao(), sc);
+			int resultadoPlayer1 = jogador1.playerTurn(jogador1.getMao(), sc);
 			if (trucoAtivo == false) {
 				pedidodeTruco = bot1.pedirTruco();
 				if (pedidodeTruco) {
@@ -299,6 +348,7 @@ public class Truco {
 						System.out.println("\n\tO Bot recusou o truco. Time 2 ganha a rodada.");
 						rodada2 = 2;
 						pontuacao2 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
@@ -313,15 +363,16 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = bot3.aceitarTruco();
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Bot recusou o truco. Time 1 ganha a rodada.");
+						System.out.println("\n\tO Jogador 2 recusou o truco. Time 1 ganha a rodada.");
 						rodada1 = 2;
 						pontuacao1 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
 
 			}
-			int resultadoBot2 = jogador2.playerTurn(jogador2.getMao(), sc);
+			int resultadoPlayer2 = jogador2.playerTurn(jogador2.getMao(), sc);
 			if (trucoAtivo == false) {
 				pedidodeTruco = bot3.pedirTruco();
 				if (pedidodeTruco) {
@@ -330,16 +381,17 @@ public class Truco {
 					System.out.println("\n\tTruco!!!");
 					aceitaTruco = jogador1.aceitarTruco(sc);
 					if (!aceitaTruco) {
-						System.out.println("\n\tO Jogador recusou o truco. Time 2 ganha a rodada.");
+						System.out.println("\n\tO Jogador 1 recusou o truco. Time 2 ganha a rodada.");
 						rodada2 = 2;
 						pontuacao2 += 1;
+						return;
 					}
 					trucoAtivo = true;
 				}
 
 			}
 			int resultadoBot3 = bot3.jogarCarta(bot3.getMaodobot());
-			int maiorCartaTime1 = Math.max(resultadoPlayer, resultadoBot2);
+			int maiorCartaTime1 = Math.max(resultadoPlayer1, resultadoPlayer2);
 			int maiorCartaTime2 = Math.max(resultadoBot1, resultadoBot3);
 
 			if (rodada1 + rodada2 == 0) {
@@ -351,26 +403,58 @@ public class Truco {
 			}
 
 			if (maiorCartaTime1 > maiorCartaTime2) {
+				rodadas++;
 				rodada1++;
 				System.out.println("\n\tO time 1 ganhou a rodada!");
 			} else if (maiorCartaTime1 < maiorCartaTime2) {
 				rodada2++;
+				rodadas++;
 				System.out.println("\n\tO time 2 ganhou a rodada!");
 			} else {
-				System.out.println("\n\tA rodada foi empate!");
-				pontoempate++;
+				System.out.println("\n\tA rodada melou!");
+				pontoEmpate++;
+				rodadas++;
 
-				if (rodada1 + rodada2 == 2) {
+				if (rodadas == 3) {
 					if (primeirovencedor == 1) {
 						rodada1 = 2;
 						System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
-						pontuacao1 += pontoempate;
+						pontuacao1 += pontoEmpate;
+						return;
 					} else if (primeirovencedor == 2) {
 						rodada2 = 2;
 						System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
-						pontuacao1 += pontoempate;
+						pontuacao2 += pontoEmpate;
+						return;
+					} else if (rodada1 > rodada2) {
+						rodada1 = 2;
+						System.out.println("\n\tO time 1 ganha o ponto por ter ganho uma rodada.");
+						pontuacao1 += pontosRodada;
+						return;
+					} else if (rodada1 < rodada2) {
+						rodada2 = 2;
+						System.out.println("\n\tO time 2 ganha o ponto por ter ganho uma rodada.");
+						pontuacao2 += pontosRodada;
+						return;
+					} else if (pontoEmpate == 3) {
+						System.out.println("A rodada inteira melou, ninguém recebe ponto.");
+						return;
 					}
-					pontoempate = 0;
+					pontoEmpate = 0;
+					return;
+
+				} else if (rodadas == 2) {
+					if (pontoEmpate == 1) {
+						if (rodada1 == 1) {
+							rodada1 = 2;
+							System.out.println("\n\tO time 1 ganha o ponto por ter ganho a primeira rodada.");
+							return;
+						} else {
+							rodada2 = 2;
+							System.out.println("\n\tO time 2 ganha o ponto por ter ganho a primeira rodada.");
+							return;
+						}
+					}
 				}
 			}
 

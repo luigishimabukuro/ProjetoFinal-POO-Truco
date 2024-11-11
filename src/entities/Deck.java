@@ -105,68 +105,84 @@ public class Deck {
 	public int getCardValue(Card card) {
 		String[] parts = card.toString().split(" de ");
 		String face = parts[0];
-		String suit = parts[1];
-		String manilhaFace = manilha(getVira());
 
-		int faceValue;
-		int suitValue = 0;
+		int value;
 
 		switch (face) {
 		case "As":
-			faceValue = 8;
+			value = 8;
 			break;
 		case "Dois":
-			faceValue = 9;
+			value = 9;
 			break;
 		case "Tres":
-			faceValue = 10;
+			value = 10;
 			break;
 		case "Quatro":
-			faceValue = 1;
+			value = 1;
 			break;
 		case "Cinco":
-			faceValue = 2;
+			value = 2;
 			break;
 		case "Seis":
-			faceValue = 3;
+			value = 3;
 			break;
 		case "Sete":
-			faceValue = 4;
+			value = 4;
 			break;
 		case "Dama":
-			faceValue = 5;
+			value = 5;
 			break;
 		case "Valete":
-			faceValue = 6;
+			value = 6;
 			break;
 		case "Rei":
-			faceValue = 7;
+			value = 7;
 			break;
 		default:
-			faceValue = 0;
+			value = 0;
 			break;
 		}
-
-		if (face.equals(manilhaFace)) {
-			switch (suit) {
-			case "Copas":
-				suitValue = 10;
-				break;
-			case "Ouro":
-				suitValue = 20;
-				break;
-			case "Paus":
-				suitValue = 30;
-				break;
-			case "Espadas":
-				suitValue = 40;
-				break;
-			default:
-				suitValue = 0;
-				break;
-			}
+		boolean manilha = eManilha(card);
+		if (manilha) {
+			System.out.println("\n\tEntrei pq é manilha");
+			value += manilhaValue(card);
 		}
-		return faceValue + suitValue;
+
+		return value;
+	}
+
+	private boolean eManilha(Card card) {
+		boolean eManilha = false;
+		String[] parts = card.toString().split(" de ");
+		String face = parts[0];
+		String manilhaFace = manilha(getVira());
+		if (face.equals(manilhaFace)) {
+			eManilha = true;
+		}
+		eManilha = false;
+
+		return eManilha;
+
+	}
+
+	public int manilhaValue(Card card) {
+		String[] parts = card.toString().split(" de ");
+		String suit = parts[1];
+		int valor = 0;
+		switch (suit) {
+		case "Copas":
+			valor = 30;
+		case "Ouro":
+			valor = 20;
+		case "Paus":
+			valor = 40;
+		case "Espadas":
+			valor = 10;
+		default:
+			valor = 0;
+		}
+		return valor;
 	}
 
 }
