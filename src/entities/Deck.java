@@ -22,34 +22,30 @@ public class Deck {
 		}
 	}
 
-	public void reset() {
+	public void reset() { // Reseta o baralho e depois embaralha.
 		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
 		String[] suits = { "Copas", "Ouros", "Paus", "Espadas" };
-
-		System.out.println("Antes de limpar: " + deck.size());
+		vira = null;
+		manilha = null;
 		deck.clear();
-		System.out.println("Depois de limpar: " + deck.size());
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 10; j++) {
 				deck.add(new Card(faces[j], suits[i]));
 			}
 		}
-
-		System.out.println("Depois de adicionar cartas: " + deck.size());
-		vira = null;
-		manilha = null;
-	}
-
-	public void shuffle() {
 		Collections.shuffle(deck);
 	}
 
-	public Card dealCard() {
+	public void shuffle() { // Embaralha o baralho.
+		Collections.shuffle(deck);
+	}
+
+	public Card dealCard() { // Remove uma carta do Baralho.
 		return deck.remove(0);
 	}
 
-	public void setVira(Card card) {
+	public void setVira(Card card) { // Define o vira tirando uma carta do baralho.
 		vira = card;
 		setManilha(card);
 	}
@@ -59,7 +55,7 @@ public class Deck {
 		return vira;
 	}
 
-	public void setManilha(Card vira) {
+	public void setManilha(Card vira) { // Define a manilha com base do vira.
 		switch (vira.getFace()) {
 		case "As":
 			manilha = "Dois";
@@ -95,7 +91,6 @@ public class Deck {
 	}
 
 	public String getManilha() {
-		System.out.println("manilha? " + manilha);
 		return manilha;
 	}
 

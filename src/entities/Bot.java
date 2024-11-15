@@ -12,26 +12,27 @@ public class Bot {
 		return maodoBot;
 	}
 
-	public void setBotHand(Deck Deck) {
+	public void setBotHand(Deck Deck) { //Seta a mão do bot com 3 cartas.
 		maodoBot.add(Deck.dealCard());
 		maodoBot.add(Deck.dealCard());
-		maodoBot.add(Deck.dealCard());;
+		maodoBot.add(Deck.dealCard());
+		;
 	}
 
 	public int getValue() {
 		return cards_value;
 	}
 
-	public int jogarCarta(ArrayList<Card> maodoBot) {
+	public int jogarCarta(ArrayList<Card> maodoBot) { // Joga uma carta aleatória do bot.
 		SecureRandom random = new SecureRandom();
 		int escolha = random.nextInt(maodoBot.size());
 		Card cartaEscolhida = maodoBot.remove(escolha);
 		System.out.println("\n\tO Bot jogou " + cartaEscolhida);
-		int valorCarta = cartaEscolhida.calculateCardValue();
+		int valorCarta = cartaEscolhida.calculateCardValue(Card.isManilha());
 		return valorCarta;
 	}
 
-	public boolean aceitarTruco() {
+	public boolean aceitarTruco() { // Define aleatoriamente se o bot aceita ou não o truco (50/50).
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
@@ -42,18 +43,18 @@ public class Bot {
 		return resp;
 	}
 
-	public boolean pedirTruco() {
+	public boolean pedirTruco() { // Define aleatoriamente se o bot pede ou não o truco (50/50).
 		SecureRandom random = new SecureRandom();
 		return random.nextBoolean();
 	}
 
-	public void botTurn() {
+	public void botTurn() { // Vez do Bot jogar.
 		System.out.println("\n\tVez do bot.");
 		pedirTruco();
 		jogarCarta(maodoBot);
 	}
 
-	public void reset() {
+	public void reset() { //Limpa a mão do Bot para inserir a nova mão.
 		this.maodoBot.clear();
 	}
 }

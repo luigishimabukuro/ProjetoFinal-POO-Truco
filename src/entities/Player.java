@@ -42,7 +42,7 @@ public class Player {
 		System.out.println(toString());
 		int pos = 0;
 		do {
-			System.out.println("\n\tQual carta deseja jogar?");
+			System.out.print("\n\tQual carta deseja jogar? ");
 			pos = sc.nextInt();
 			sc.nextLine();
 			if (pos < 1 || pos > PlayerDeck.size()) {
@@ -51,7 +51,7 @@ public class Player {
 		} while (pos < 1 || pos > PlayerDeck.size());
 
 		Card cartaEscolhida = PlayerDeck.remove(pos - 1);
-		valor = cartaEscolhida.calculateCardValue();
+		valor = cartaEscolhida.calculateCardValue(Card.isManilha());
 		System.out.println("\n\tValor da Carta: " + valor);
 
 		return valor;
@@ -63,28 +63,32 @@ public class Player {
 		do {
 
 			System.out.printf("\n\tDeseja trucar? (s/n): ");
-			resp = sc.nextLine().charAt(0);
-			if (resp == 's') {
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
 				truco = true;
-			} else if (resp == 'n') {
+			} else if (resp == 'N') {
 				truco = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
 			}
-		} while (resp != 's' && resp != 'n');
+		} while (resp != 'S' && resp != 'N');
 		return truco;
 	}
 
-	public boolean aceitarTruco(Scanner scanner) {
+	public boolean aceitarTruco(Scanner sc) {
 		boolean aceitar = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tAceita o truco?");
-			resp = scanner.nextLine().charAt(0);
-			if (resp == 's') {
+			System.out.println("\n\tAceita o truco? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
 				aceitar = true;
-			} else if (resp == 'n') {
+			} else if (resp == 'N') {
 				aceitar = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
 			}
-		} while (resp != 's' && resp != 'n');
+		} while (resp != 'S' && resp != 'N');
 
 		return aceitar;
 	}
@@ -96,6 +100,7 @@ public class Player {
 	public String toString() {
 		String cardstring = "";
 		int i = 1;
+		System.out.println("\n\tMão do " + getName());
 		for (Card card : maodoJogador) {
 			cardstring += "\t[" + i + "] " + card.toString() + "\n";
 			i++;
