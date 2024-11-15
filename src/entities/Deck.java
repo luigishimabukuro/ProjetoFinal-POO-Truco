@@ -1,58 +1,66 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.security.SecureRandom;
+import java.util.Collections;
 
 public class Deck {
-	private Card[] deck;
-	private String vira;
-	private int currentCard;
+	private ArrayList<Card> deck;
 	private static final int NUMBER_OF_CARDS = 40;
-	private static final SecureRandom randomNumbers = new SecureRandom();
+	Card vira;
+	static String manilha;
 
 	public Deck() {
 		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
-		String[] suits = { "Copas", "Ouro", "Paus", "Espadas" };
-		deck = new Card[NUMBER_OF_CARDS];
-		currentCard = 0;
+		String[] suits = { "Copas", "Ouros", "Paus", "Espadas" };
 
-		for (int count = 0; count < deck.length; count++)
-			deck[count] = new Card(faces[count % 10], suits[count / 10]);
+		deck = new ArrayList<>(NUMBER_OF_CARDS);
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				deck.add(new Card(faces[j], suits[i]));
+			}
+		}
 	}
 
 	public void reset() {
 		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
-		String[] suits = { "Copas", "Ouro", "Paus", "Espadas" };
-		for (int count = 0; count < deck.length; count++) {
-			deck[count] = new Card(faces[count % 10], suits[count / 10]);
+		String[] suits = { "Copas", "Ouros", "Paus", "Espadas" };
+
+		System.out.println("Antes de limpar: " + deck.size());
+		deck.clear();
+		System.out.println("Depois de limpar: " + deck.size());
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				deck.add(new Card(faces[j], suits[i]));
+			}
 		}
-		currentCard = 0;
+
+		System.out.println("Depois de adicionar cartas: " + deck.size());
 		vira = null;
-		shuffle();
+		manilha = null;
 	}
 
 	public void shuffle() {
-		currentCard = 0;
-
-		for (int first = 0; first < deck.length; first++) {
-			int second = randomNumbers.nextInt(NUMBER_OF_CARDS);
-			Card temp = deck[first];
-			deck[first] = deck[second];
-			deck[second] = temp;
-		}
+		Collections.shuffle(deck);
 	}
 
-	public String getVira() {
-		if (vira == null) {
-			vira = dealCard().toString();
-		}
+	public Card dealCard() {
+		return deck.remove(0);
+	}
+
+	public void setVira(Card card) {
+		vira = card;
+		setManilha(card);
+	}
+
+	public Card getVira() {
+		vira = dealCard();
 		return vira;
 	}
 
-	public String manilha(String vira) {
-		String manilha = "";
-		switch (vira) {
+	public void setManilha(Card vira) {
+		switch (vira.getFace()) {
 		case "As":
 			manilha = "Dois";
 			break;
@@ -84,105 +92,24 @@ public class Deck {
 			manilha = "As";
 			break;
 		}
+	}
+
+	public String getManilha() {
+		System.out.println("manilha? " + manilha);
 		return manilha;
 	}
 
-	public List<Card> Mao(int num) {
-		List<Card> mao = new ArrayList<>();
-		for (int i = 0; i < num; i++) {
-			mao.add(dealCard());
-		}
-		return mao;
+	public static boolean isManilha(Card card) {
+		return card.getFace().equals(manilha);
 	}
 
-	public Card dealCard() {
-		if (currentCard < deck.length)
-			return deck[currentCard++];
-		else
-			return null;
-	}
-
-	public int getCardValue(Card card) {
-		String[] parts = card.toString().split(" de ");
-		String face = parts[0];
-
-		int value;
-
-		switch (face) {
-		case "As":
-			value = 8;
-			break;
-		case "Dois":
-			value = 9;
-			break;
-		case "Tres":
-			value = 10;
-			break;
-		case "Quatro":
-			value = 1;
-			break;
-		case "Cinco":
-			value = 2;
-			break;
-		case "Seis":
-			value = 3;
-			break;
-		case "Sete":
-			value = 4;
-			break;
-		case "Dama":
-			value = 5;
-			break;
-		case "Valete":
-			value = 6;
-			break;
-		case "Rei":
-			value = 7;
-			break;
-		default:
-			value = 0;
-			break;
+	public String toString() {
+		String cardstring = "";
+		int i = 1;
+		for (Card card : deck) {
+			cardstring += "\t[" + i + "] " + card.toString() + "\n";
+			i++;
 		}
-		boolean manilha = eManilha(card);
-		if (manilha) {
-			System.out.println("\n\tEntrei pq é manilha");
-			value += manilhaValue(card);
-		}
-
-		return value;
+		return cardstring;
 	}
-
-	private boolean eManilha(Card card) {
-		boolean eManilha = false;
-		String[] parts = card.toString().split(" de ");
-		String face = parts[0];
-		String manilhaFace = manilha(getVira());
-		if (face.equals(manilhaFace)) {
-			eManilha = true;
-		}
-		eManilha = false;
-
-		return eManilha;
-
-	}
-
-	public int manilhaValue(Card card) {
-		String[] parts = card.toString().split(" de ");
-		String suit = parts[1];
-		int valor = 0;
-		switch (suit) {
-		case "Copas":
-			valor = 30;
-		case "Ouro":
-			valor = 20;
-		case "Paus":
-			valor = 40;
-		case "Espadas":
-			valor = 10;
-		default:
-			valor = 0;
-		}
-		return valor;
-	}
-
 }

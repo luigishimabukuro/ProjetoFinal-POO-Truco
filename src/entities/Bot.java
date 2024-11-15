@@ -1,33 +1,34 @@
 package entities;
 
 import java.security.SecureRandom;
-import java.util.List;
+import java.util.ArrayList;
 
-public class Bot extends Deck {
+public class Bot {
 
-	private List<Card> maodobot;
+	public ArrayList<Card> maodoBot = new ArrayList<>();
+	private int cards_value;
 
-	public void receberCartas(List<Card> maodobot) {
-		this.setMaodobot(maodobot);
+	public ArrayList<Card> getBotHand() {
+		return maodoBot;
 	}
 
-	public List<Card> getMaodobot() {
-		return maodobot;
+	public void setBotHand(Deck Deck) {
+		maodoBot.add(Deck.dealCard());
+		maodoBot.add(Deck.dealCard());
+		maodoBot.add(Deck.dealCard());;
 	}
 
-	public void setMaodobot(List<Card> maodobot) {
-		this.maodobot = maodobot;
+	public int getValue() {
+		return cards_value;
 	}
 
-	public void botTurn() {
-		System.out.println("\n\tVez do bot.");
-		pedirTruco();
-		jogarCarta(maodobot);
-	}
-
-	public boolean pedirTruco() {
+	public int jogarCarta(ArrayList<Card> maodoBot) {
 		SecureRandom random = new SecureRandom();
-		return random.nextBoolean();
+		int escolha = random.nextInt(maodoBot.size());
+		Card cartaEscolhida = maodoBot.remove(escolha);
+		System.out.println("\n\tO Bot jogou " + cartaEscolhida);
+		int valorCarta = cartaEscolhida.calculateCardValue();
+		return valorCarta;
 	}
 
 	public boolean aceitarTruco() {
@@ -41,12 +42,18 @@ public class Bot extends Deck {
 		return resp;
 	}
 
-	public int jogarCarta(List<Card> maodoBot) {
+	public boolean pedirTruco() {
 		SecureRandom random = new SecureRandom();
-		int escolha = random.nextInt(maodobot.size());
-		Card cartaEscolhida = maodobot.remove(escolha);
-		System.out.println("\n\tO Bot jogou " + cartaEscolhida);
-		int valorCarta = getCardValue(cartaEscolhida);
-		return valorCarta;
+		return random.nextBoolean();
+	}
+
+	public void botTurn() {
+		System.out.println("\n\tVez do bot.");
+		pedirTruco();
+		jogarCarta(maodoBot);
+	}
+
+	public void reset() {
+		this.maodoBot.clear();
 	}
 }
