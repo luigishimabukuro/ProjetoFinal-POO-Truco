@@ -10,7 +10,6 @@ public class Player {
 	private int cards_value;
 
 	public Player(Deck Deck, String name) {
-
 		setName(name);
 	}
 
@@ -51,7 +50,7 @@ public class Player {
 		} while (pos < 1 || pos > PlayerDeck.size());
 
 		Card cartaEscolhida = PlayerDeck.remove(pos - 1);
-		valor = cartaEscolhida.calculateCardValue(Card.isManilha());
+		valor = cartaEscolhida.calculateCardValue();
 		System.out.println("\n\tValor da Carta: " + valor);
 
 		return valor;
@@ -95,6 +94,108 @@ public class Player {
 
 	public void reset() {
 		this.maodoJogador.clear();
+	}
+
+	public boolean pedir6(Scanner sc) {
+		boolean aceitar = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tPede 6!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				aceitar = true;
+			} else if (resp == 'N') {
+				aceitar = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return aceitar;
+	}
+
+	public boolean pedir9(Scanner sc) {
+		boolean aceitar = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tPede 9!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				aceitar = true;
+			} else if (resp == 'N') {
+				aceitar = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return aceitar;
+	}
+
+	public boolean pedir12(Scanner sc) {
+		boolean pedir = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tPede 12!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				pedir = true;
+			} else if (resp == 'N') {
+				pedir = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return pedir;
+	}
+
+	public boolean aceitar6(Scanner sc) {
+		boolean pedir = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tAceita o 6?!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				pedir = true;
+			} else if (resp == 'N') {
+				pedir = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return pedir;
+	}
+
+	public boolean aceitar9(Scanner sc) {
+		boolean pedir = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tAceita o 9?!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				pedir = true;
+			} else if (resp == 'N') {
+				pedir = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return pedir;
+	}
+
+	public boolean aceitar12(Scanner sc) {
+		boolean pedir = false;
+		char resp = 0;
+		do {
+			System.out.println("\n\tAceita o 12!? ");
+			resp = Character.toUpperCase(sc.nextLine().charAt(0));
+			if (resp == 'S') {
+				pedir = true;
+			} else if (resp == 'N') {
+				pedir = false;
+			} else if (resp != 'S' && resp != 'N') {
+				System.out.println("\n\t Opção inválida!!!!");
+			}
+		} while (resp != 'S' && resp != 'N');
+		return pedir;
 	}
 
 	public String toString() {

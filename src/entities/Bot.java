@@ -12,7 +12,7 @@ public class Bot {
 		return maodoBot;
 	}
 
-	public void setBotHand(Deck Deck) { //Seta a mão do bot com 3 cartas.
+	public void setBotHand(Deck Deck) { // Seta a mão do bot com 3 cartas.
 		maodoBot.add(Deck.dealCard());
 		maodoBot.add(Deck.dealCard());
 		maodoBot.add(Deck.dealCard());
@@ -28,7 +28,7 @@ public class Bot {
 		int escolha = random.nextInt(maodoBot.size());
 		Card cartaEscolhida = maodoBot.remove(escolha);
 		System.out.println("\n\tO Bot jogou " + cartaEscolhida);
-		int valorCarta = cartaEscolhida.calculateCardValue(Card.isManilha());
+		int valorCarta = cartaEscolhida.calculateCardValue();
 		return valorCarta;
 	}
 
@@ -48,13 +48,67 @@ public class Bot {
 		return random.nextBoolean();
 	}
 
+	public boolean pedir6() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot pediu 6!!");
+		}
+		return resp;
+	}
+
+	public boolean pedir9() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot pediu 9!!");
+		}
+		return resp;
+	}
+
+	public boolean pedir12() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot pediu 12!!");
+		}
+		return resp;
+	}
+
+	public boolean aceitar6() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot aceitou o 6!!");
+		}
+		return resp;
+	}
+
+	public boolean aceitar9() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot aceitou o 9!!");
+		}
+		return resp;
+	}
+
+	public boolean aceitar12() {
+		SecureRandom random = new SecureRandom();
+		boolean resp = random.nextBoolean();
+		if (resp) {
+			System.out.println("\n\tO Bot aceitou o 12!!");
+		}
+		return resp;
+	}
+
 	public void botTurn() { // Vez do Bot jogar.
 		System.out.println("\n\tVez do bot.");
 		pedirTruco();
 		jogarCarta(maodoBot);
 	}
 
-	public void reset() { //Limpa a mão do Bot para inserir a nova mão.
+	public void reset() { // Limpa a mão do Bot para inserir a nova mão.
 		this.maodoBot.clear();
 	}
 }

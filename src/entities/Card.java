@@ -10,10 +10,10 @@ public class Card {
 		this.face = face;
 		this.suit = suit;
 		Card.isManilha = Deck.isManilha(this);
-		this.value = calculateCardValue(Card.isManilha());
+		this.value = calculateCardValue();
 	}
 
-	public int calculateCardValue(boolean isManilha) { // Calcula o valor da carta pelo seu número
+	public int calculateCardValue() { // Calcula o valor da carta pelo seu número
 		int cardValue;
 		switch (face) {
 		case "As":
@@ -52,7 +52,7 @@ public class Card {
 		}
 
 		// Verificação de Manilha, caso seja manilha, altera o valor.
-		if (isManilha) {
+		if (Card.isManilha) {
 			System.out.println("\nEntrei na verificação de manilha");
 			System.out.println("\nisManilha: " + isManilha);
 			System.out.println("\nNaipe:" + suit);
