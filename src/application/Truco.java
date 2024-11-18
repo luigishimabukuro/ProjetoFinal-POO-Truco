@@ -1548,7 +1548,6 @@ public class Truco {
 
 		rodada1 = 0;
 		rodada2 = 0;
-		System.out.println("\n\tO vira é: " + deck.showVira());
 	}
 
 }
