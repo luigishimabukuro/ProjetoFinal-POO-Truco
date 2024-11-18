@@ -27,7 +27,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		int escolha = random.nextInt(maodoBot.size());
 		Card cartaEscolhida = maodoBot.remove(escolha);
-		System.out.println("\n\tO Bot jogou " + cartaEscolhida);
+		System.out.println("\tO Bot jogou " + cartaEscolhida);
 		int valorCarta = cartaEscolhida.calculateCardValue();
 		return valorCarta;
 	}
@@ -50,27 +50,36 @@ public class Bot {
 
 	public boolean pedir6() {
 		SecureRandom random = new SecureRandom();
-		boolean resp = random.nextBoolean();
+		double probabilityforTrue = 0.3;
+		double randomValue;
+		randomValue = random.nextDouble();
+		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 6!!");
+			System.out.println("\n\tO Bot pediu 6!!\n");
 		}
 		return resp;
 	}
 
 	public boolean pedir9() {
 		SecureRandom random = new SecureRandom();
-		boolean resp = random.nextBoolean();
+		double probabilityforTrue = 0.1;
+		double randomValue;
+		randomValue = random.nextDouble();
+		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 9!!");
+			System.out.println("\n\tO Bot pediu 9!!\n");
 		}
 		return resp;
 	}
 
 	public boolean pedir12() {
 		SecureRandom random = new SecureRandom();
-		boolean resp = random.nextBoolean();
+		double probabilityforTrue = 0.05;
+		double randomValue;
+		randomValue = random.nextDouble();
+		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 12!!");
+			System.out.println("\n\tO Bot pediu 12!!\n");
 		}
 		return resp;
 	}
@@ -79,7 +88,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 6!!");
+			System.out.println("\n\tO Bot aceitou o 6!!\n");
 		}
 		return resp;
 	}
@@ -88,7 +97,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 9!!");
+			System.out.println("\n\tO Bot aceitou o 9!!\n");
 		}
 		return resp;
 	}
@@ -97,7 +106,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 12!!");
+			System.out.println("\n\tO Bot aceitou o 12!!\n");
 		}
 		return resp;
 	}

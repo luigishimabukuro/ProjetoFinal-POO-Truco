@@ -38,6 +38,7 @@ public class Player {
 
 	public int playerTurn(ArrayList<Card> PlayerDeck, Scanner sc) {
 		int valor = 0;
+
 		System.out.println(toString());
 		int pos = 0;
 		do {

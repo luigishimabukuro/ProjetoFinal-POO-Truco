@@ -4,12 +4,10 @@ public class Card {
 	private final String face;
 	private final String suit;
 	private final int value;
-	private static boolean isManilha;
 
 	public Card(String face, String suit) {
 		this.face = face;
 		this.suit = suit;
-		Card.isManilha = Deck.isManilha(this);
 		this.value = calculateCardValue();
 	}
 
@@ -52,20 +50,24 @@ public class Card {
 		}
 
 		// Verificação de Manilha, caso seja manilha, altera o valor.
-		if (Card.isManilha) {
-			System.out.println("\nEntrei na verificação de manilha");
-			System.out.println("\nisManilha: " + isManilha);
-			System.out.println("\nNaipe:" + suit);
+		if (isManilha()) {
 			switch (suit) {
 			case "Copas":
 				cardValue = 13;
+				break;
 			case "Ouros":
 				cardValue = 11;
+				break;
 			case "Espadas":
 				cardValue = 12;
+				break;
 			case "Paus":
 				cardValue = 14;
+				break;
+
 			default:
+				break;
+
 			}
 			return cardValue;
 		}
@@ -84,8 +86,8 @@ public class Card {
 		return suit;
 	}
 
-	public static boolean isManilha() {
-		return isManilha;
+	public boolean isManilha() {
+		return Deck.isManilha(this);
 	}
 
 	public String toString() {

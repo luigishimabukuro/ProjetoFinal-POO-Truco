@@ -6,8 +6,21 @@ import java.util.Collections;
 public class Deck {
 	private ArrayList<Card> deck;
 	private static final int NUMBER_OF_CARDS = 40;
-	Card vira;
+	private Card vira;
 	static String manilha;
+
+	public Card getVira() {
+		return this.vira;
+	}
+
+	public void setVira() {
+		vira = dealCard();
+		setManilha(vira);
+	}
+
+	public String showVira() {
+		return vira.getFace() + " de " + vira.getSuit();
+	}
 
 	public Deck() {
 		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
@@ -45,16 +58,6 @@ public class Deck {
 		return deck.remove(0);
 	}
 
-	public void setVira(Card card) { // Define o vira tirando uma carta do baralho.
-		vira = card;
-		setManilha(card);
-	}
-
-	public Card getVira() {
-		vira = dealCard();
-		return vira;
-	}
-
 	public void setManilha(Card vira) { // Define a manilha com base do vira.
 		switch (vira.getFace()) {
 		case "As":
@@ -86,6 +89,9 @@ public class Deck {
 			break;
 		case "Rei":
 			manilha = "As";
+			break;
+		default:
+			manilha = "pika";
 			break;
 		}
 	}
