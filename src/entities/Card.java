@@ -58,16 +58,16 @@ public class Card {
 			System.out.println("\nNaipe:" + suit);
 			switch (suit) {
 			case "Copas":
-				return 30;
+				cardValue = 13;
 			case "Ouros":
-				return 10;
+				cardValue = 11;
 			case "Espadas":
-				return 20;
+				cardValue = 12;
 			case "Paus":
-				return 40;
+				cardValue = 14;
 			default:
-				return cardValue;
 			}
+			return cardValue;
 		}
 		return cardValue;
 	}

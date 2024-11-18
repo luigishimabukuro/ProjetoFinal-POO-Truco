@@ -77,7 +77,7 @@ public class Truco {
 				}
 
 				System.out.println("\n\t" + ANSI_YELLOW + "Pontuação atual: \n\t" + ANSI_GREEN + "Time 1: " + pontuacao1
-						+ ANSI_RESET + "\n\t" + ANSI_RED + "Time 2: " + pontuacao2 + ANSI_RESET);
+						+ ANSI_RESET + "\n\t" + ANSI_RED + "Time 2: " + pontuacao2 + ANSI_RESET + "\n\n\n\n\n\n\n");
 
 				resetarRodada1(deck, jogador1, bot1, bot2, bot3); // Reseta a rodada, resetando a mão e o deck.
 			}
@@ -198,8 +198,8 @@ public class Truco {
 		boolean aceitaTruco = false;
 		int pontoEmpate = 0;
 		int primeirovencedor = 0;
-		// Até rodada 1 ou rodada 2 menor que 2, continua a rodada.
 
+		// Até rodada1 ou rodada2 menor que 2, continua a rodada.
 		while (rodada1 < 2 && rodada2 < 2) {
 			if (trucoAtivo == false) {
 				pedidodeTruco = jogador1.truco(sc); // Verificação se vai pedir ou não truco.
@@ -261,6 +261,7 @@ public class Truco {
 				}
 			} else if (trucoAtivo == true) {
 				if (flag == 1) {
+
 					if (pedir62 && !pedir91 && !pedir122) {
 						pedir91 = jogador1.pedir9(sc);
 						if (pedir91) {
@@ -289,9 +290,50 @@ public class Truco {
 							}
 						}
 					}
-				}
-				if (flag == 2) {
-					if (pedir92 && !pedir121) {
+				} else if (flag == 2) {
+					if (!pedir61 && !pedir92 && !pedir121) {
+						pedir61 = jogador1.pedir6(sc);
+						if (pedir61) {
+							aceitar62 = bot1.aceitar6();
+							if (aceitar62) {
+								pontosRodada = 6;
+								pedir92 = bot1.pedir9();
+								if (pedir92) {
+									aceitar91 = jogador1.aceitar9(sc);
+									if (aceitar91) {
+										pontosRodada = 9;
+										pedir121 = jogador1.pedir12(sc);
+										if (pedir121) {
+											aceitar122 = bot1.aceitar12();
+											if (aceitar122) {
+												pontosRodada = 12;
+											} else {
+												System.out.println("\n\tO Bot recusou o 12, O" + ANSI_GREEN + " Time 1"
+														+ ANSI_RESET + " ganha a rodada.");
+												rodada1 = 2;
+												pontuacao1 = pontosRodada;
+												return;
+											}
+
+										}
+									} else {
+										System.out.println("\n\tO Jogador recusou o 9, O" + ANSI_RED + " Time 2"
+												+ ANSI_RESET + " ganha a rodada.");
+										rodada2 = 2;
+										pontuacao2 += pontosRodada;
+										return;
+									}
+								}
+
+							} else {
+								System.out.println("\n\tO Bot recusou o 6, O" + ANSI_GREEN + " Time 1" + ANSI_RESET
+										+ " ganha a rodada.");
+								rodada1 = 2;
+								pontuacao1 = pontosRodada;
+								return;
+							}
+						}
+					} else if (pedir61 && pedir92 && !pedir121) {
 						pedir121 = jogador1.pedir12(sc);
 						if (pedir121) {
 							aceitar122 = bot1.aceitar12();
@@ -301,12 +343,12 @@ public class Truco {
 								System.out.println("\n\tO Bot recusou o 12, O" + ANSI_GREEN + " Time 1" + ANSI_RESET
 										+ " ganha a rodada.");
 								rodada1 = 2;
-								pontuacao1 += pontosRodada;
+								pontuacao1 = pontosRodada;
 								return;
 							}
-
 						}
 					}
+
 				}
 			}
 			int resultadoPlayer = jogador1.playerTurn(jogador1.getPlayerHand(), sc);
