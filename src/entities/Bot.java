@@ -7,9 +7,22 @@ public class Bot {
 
 	public ArrayList<Card> maodoBot = new ArrayList<>();
 	private int cards_value;
+	private String name;
+
+	public Bot(Deck Deck, String name) {
+		setName(name);
+	}
 
 	public ArrayList<Card> getBotHand() {
 		return maodoBot;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setBotHand(Deck Deck) { // Seta a mão do bot com 3 cartas.
@@ -27,7 +40,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		int escolha = random.nextInt(maodoBot.size());
 		Card cartaEscolhida = maodoBot.remove(escolha);
-		System.out.println("\tO Bot jogou " + cartaEscolhida);
+		System.out.println("\tO " + name + " jogou " + cartaEscolhida);
 		int valorCarta = cartaEscolhida.calculateCardValue();
 		return valorCarta;
 	}
@@ -36,9 +49,9 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o truco!!");
+			System.out.println("\n\tO " + name + " aceitou o truco!!");
 		} else {
-			System.out.println("\n\tO Bot não aceitou o truco!!");
+			System.out.println("\n\tO " + name + " não aceitou o truco!!");
 		}
 		return resp;
 	}
@@ -55,7 +68,7 @@ public class Bot {
 		randomValue = random.nextDouble();
 		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 6!!\n");
+			System.out.println("\n\tO " + name + " pediu 6!!\n");
 		}
 		return resp;
 	}
@@ -67,7 +80,7 @@ public class Bot {
 		randomValue = random.nextDouble();
 		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 9!!\n");
+			System.out.println("\n\tO " + name + " pediu 9!!\n");
 		}
 		return resp;
 	}
@@ -79,7 +92,7 @@ public class Bot {
 		randomValue = random.nextDouble();
 		boolean resp = randomValue < probabilityforTrue;
 		if (resp) {
-			System.out.println("\n\tO Bot pediu 12!!\n");
+			System.out.println("\n\tO " + name + " pediu 12!!\n");
 		}
 		return resp;
 	}
@@ -88,7 +101,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 6!!\n");
+			System.out.println("\n\tO " + name + " aceitou o 6!!\n");
 		}
 		return resp;
 	}
@@ -97,7 +110,7 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 9!!\n");
+			System.out.println("\n\tO " + name + " aceitou o 9!!\n");
 		}
 		return resp;
 	}
@@ -106,13 +119,13 @@ public class Bot {
 		SecureRandom random = new SecureRandom();
 		boolean resp = random.nextBoolean();
 		if (resp) {
-			System.out.println("\n\tO Bot aceitou o 12!!\n");
+			System.out.println("\n\tO " + name + " aceitou o 12!!\n");
 		}
 		return resp;
 	}
 
 	public void botTurn() { // Vez do Bot jogar.
-		System.out.println("\n\tVez do bot.");
+		System.out.println("\n\tVez do " + name + ".");
 		pedirTruco();
 		jogarCarta(maodoBot);
 	}

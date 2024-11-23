@@ -4,6 +4,11 @@ import java.util.Scanner;
 import entities.Bot;
 import entities.Deck;
 import entities.Player;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Truco {
 	public static String manilhas;
@@ -22,6 +27,21 @@ public class Truco {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_BLACK = "\u001B[30m";
+
+	public class Main extends Application {
+
+		@Override
+		public void start(Stage stage) {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+				Scene scene = new Scene(root);
+				stage.setScene(scene);
+				stage.show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -51,19 +71,21 @@ public class Truco {
 		} while (jog != 1 && jog != 2);
 		if (jog == 1) { // Inicializa os objetos.
 			Player jogador1 = new Player(deck, "Jogador 1");
-			Bot bot1 = new Bot();
-			Bot bot2 = new Bot();
-			Bot bot3 = new Bot();
+			Bot bot1 = new Bot(deck, "Bot 1");
+			Bot bot2 = new Bot(deck, "Bot 2");
+			Bot bot3 = new Bot(deck, "Bot 3");
+
+			System.out.println(ANSI_GREEN + "\n\tTime 1:" + ANSI_RESET + "\n\tJogador 1\n\tBot 2" + ANSI_RED
+					+ "\n\n\tTime 2:" + ANSI_RESET + "\n\tBot 1\n\tBot 3");
 
 			while (pontuacao1 < 12 && pontuacao2 < 12) { // Enquanto a pontuação for menor que 12, o jogo continua.
 
 				distribuirCartas1(deck, jogador1, bot1, bot2, bot3); // Distribui as cartas pros jogadores.
 				System.out.println("\n\tO vira é: " + deck.showVira());
 				System.out.println("\n\tAs manilhas são:");
-				System.out.println(
-						"\n\t●" + manilhas + " de " + ANSI_RED + "Copas ♥" + ANSI_RESET + "\n\t●" + manilhas + " de "
-								+ ANSI_BLACK + "Paus ♣" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_RED + "Ouro ♦"
-								+ ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_BLACK + "Espadas ♠\n" + ANSI_RESET);
+				System.out.println("\n\t●" + manilhas + " de " + ANSI_BLACK + "Paus ♣" + ANSI_RESET + "\n\t●" + manilhas
+						+ " de " + ANSI_RED + "Copas ♥" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_BLACK
+						+ "Espadas ♠" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_RED + "Ouro ♦" + ANSI_RESET);
 				System.out.println(jogador1.toString());
 				rodada1 = 0;
 				rodada2 = 0;
@@ -105,9 +127,12 @@ public class Truco {
 
 		} else if (jog == 2) {
 			Player jogador1 = new Player(deck, "Jogador 1");
-			Bot bot1 = new Bot();
+			Bot bot1 = new Bot(deck, "Bot 1");
 			Player jogador2 = new Player(deck, "Jogador 2");
-			Bot bot2 = new Bot();
+			Bot bot2 = new Bot(deck, "Bot 2");
+
+			System.out.println(ANSI_GREEN + "\n\tTime 1:" + ANSI_RESET + "\n\tJogador 1\n\tJogador 2" + ANSI_RED
+					+ "\n\n\tTime 2:" + ANSI_RESET + "\n\tBot 1\n\tBot 2");
 
 			while (pontuacao1 < 12 && pontuacao2 < 12) {
 
@@ -115,10 +140,9 @@ public class Truco {
 
 				System.out.println("\n\tO vira é: " + deck.showVira());
 				System.out.println("\n\tAs manilhas são:");
-				System.out.println(
-						"\n\t●" + manilhas + " de " + ANSI_RED + "Copas ♥" + ANSI_RESET + "\n\t●" + manilhas + " de "
-								+ ANSI_RED + "Ouro ♦" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_BLACK + "Paus ♣"
-								+ ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_BLACK + "Espadas ♠\n" + ANSI_RESET);
+				System.out.println("\n\t●" + manilhas + " de " + ANSI_BLACK + "Paus ♣" + ANSI_RESET + "\n\t●" + manilhas
+						+ " de " + ANSI_RED + "Copas ♥" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_BLACK
+						+ "Espadas ♠" + ANSI_RESET + "\n\t●" + manilhas + " de " + ANSI_RED + "Ouro ♦" + ANSI_RESET);
 				System.out.println(jogador1.toString());
 				rodada1 = 0;
 				rodada2 = 0;

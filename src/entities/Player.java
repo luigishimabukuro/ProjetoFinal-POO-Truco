@@ -79,7 +79,7 @@ public class Player {
 		boolean aceitar = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tAceita o truco? ");
+			System.out.printf("\n\tAceita o truco? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				aceitar = true;
@@ -101,7 +101,7 @@ public class Player {
 		boolean aceitar = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tPede 6!? ");
+			System.out.printf("\n\tPede 6!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				aceitar = true;
@@ -118,7 +118,7 @@ public class Player {
 		boolean aceitar = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tPede 9!? ");
+			System.out.printf("\n\tPede 9!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				aceitar = true;
@@ -135,7 +135,7 @@ public class Player {
 		boolean pedir = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tPede 12!? ");
+			System.out.printf("\n\tPede 12!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				pedir = true;
@@ -152,7 +152,7 @@ public class Player {
 		boolean pedir = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tAceita o 6?!? ");
+			System.out.printf("\n\tAceita o 6?!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				pedir = true;
@@ -169,7 +169,7 @@ public class Player {
 		boolean pedir = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tAceita o 9?!? ");
+			System.out.printf("\n\tAceita o 9?!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				pedir = true;
@@ -186,7 +186,7 @@ public class Player {
 		boolean pedir = false;
 		char resp = 0;
 		do {
-			System.out.println("\n\tAceita o 12!? ");
+			System.out.printf("\n\tAceita o 12!? ");
 			resp = Character.toUpperCase(sc.nextLine().charAt(0));
 			if (resp == 'S') {
 				pedir = true;
