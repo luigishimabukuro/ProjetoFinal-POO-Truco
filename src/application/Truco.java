@@ -69,7 +69,9 @@ public class Truco {
 						+ manilhas + " de " + ANSI_RED + "Copas ♥" + ANSI_RESET + "\n\t\t●" + manilhas + " de "
 						+ ANSI_BLACK + "Espadas ♠" + ANSI_RESET + "\n\t\t●" + manilhas + " de " + ANSI_RED + "Ouro ♦"
 						+ ANSI_RESET);
-
+				System.out.println(ANSI_BLACK
+						+ "========================================================================================================="
+						+ ANSI_RESET);
 				while (rodada1 < 2 && rodada2 < 2) {
 
 					if (pontuacao1 == 11 && pontuacao2 < 11) {
@@ -105,6 +107,9 @@ public class Truco {
 																				// jogador.
 					}
 				}
+				System.out.println(ANSI_BLACK
+						+ "========================================================================================================="
+						+ ANSI_RESET);
 				System.out.println("\n\t" + ANSI_YELLOW + "Pontuação atual: \n\t" + ANSI_GREEN + "Time 1: " + pontuacao1
 						+ ANSI_RESET + "\n\t" + ANSI_RED + "Time 2: " + pontuacao2 + ANSI_RESET + "\n\n");
 				resetarRodada2(deck, jogador1, bot1, jogador2, bot3); // Reseta a rodada, resetando a mão e o deck.
@@ -140,7 +145,9 @@ public class Truco {
 
 			System.out.println(ANSI_GREEN + "\n\t\t\tTime 1:" + ANSI_RESET + "\n\t\t\tJogador 1\n\t\t\tBot 2" + ANSI_RED
 					+ "\n\n\t\t\tTime 2:" + ANSI_RESET + "\n\t\t\tBot 1\n\t\t\tBot 3");
-
+			System.out.println(ANSI_BLACK
+					+ "========================================================================================================="
+					+ ANSI_RESET);
 			while (pontuacao1 < 12 && pontuacao2 < 12) { // Enquanto a pontuação for menor que 12, o jogo continua.
 
 				distribuirCartas1(deck, jogador1, bot1, bot2, bot3); // Distribui as cartas pros jogadores.
@@ -185,6 +192,9 @@ public class Truco {
 																			// jogador.
 					}
 				}
+				System.out.println(ANSI_BLACK
+						+ "\n========================================================================================================="
+						+ ANSI_RESET);
 				System.out.println("\n\t" + ANSI_YELLOW + "Pontuação atual: \n\t" + ANSI_GREEN + "Time 1: " + pontuacao1
 						+ ANSI_RESET + "\n\t" + ANSI_RED + "Time 2: " + pontuacao2 + ANSI_RESET + "\n\n");
 				resetarRodada1(deck, jogador1, bot1, bot2, bot3); // Reseta a rodada, resetando a mão e o deck.
@@ -248,7 +258,7 @@ public class Truco {
 
 		int maiorCartaTime1 = 0;
 		int maiorCartaTime2 = 0;
-		int pontosRodada = 3;
+		int pontosRodada = 1;
 
 		while (rodada1 < 2 && rodada2 < 2) {
 
@@ -286,14 +296,14 @@ public class Truco {
 			if (rodadas == 3 && pontoEmpate == 1) { // Caso a rodada 3 empate, o primeiro vencedor vence.
 				if (primeirovencedor == 1) {
 					rodada1 = 2;
-					pontuacao1 = pontosRodada;
+					pontuacao1 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_GREEN + " Time 1" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
 				} else if (primeirovencedor == 2) {
 
 					rodada2 = 2;
-					pontuacao2 = pontosRodada;
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
@@ -345,7 +355,7 @@ public class Truco {
 
 				} else if (rodada2 > rodada1) {
 					rodada2 = 2;
-
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha a rodada, por ter vencido a única rodada que não melou.");
 				}
@@ -363,12 +373,9 @@ public class Truco {
 	}
 
 	public static void MaodeFerro1(Player jogador1, Bot bot1, Bot bot2, Bot bot3, Scanner sc) {
-		int rodadas = 0;
-		int pontoEmpate = 0;
 		int maiorCartaTime1 = 0;
 		int maiorCartaTime2 = 0;
-		int primeirovencedor = 0;
-		int pontosRodada = 3;
+		int pontosRodada = 1;
 
 		while (rodada1 < 2 && rodada2 < 2) {
 
@@ -406,14 +413,14 @@ public class Truco {
 			if (rodadas == 3 && pontoEmpate == 1) { // Caso a rodada 3 empate, o primeiro vencedor vence.
 				if (primeirovencedor == 1) {
 					rodada1 = 2;
-					pontuacao1 = pontosRodada;
+					pontuacao1 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_GREEN + " Time 1" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
 				} else if (primeirovencedor == 2) {
 
 					rodada2 = 2;
-					pontuacao2 = pontosRodada;
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
@@ -430,25 +437,25 @@ public class Truco {
 				// rodada.
 				if (primeirovencedor == 1) {
 					rodada1 = 2;
-					pontuacao1 = pontosRodada;
+					pontuacao1 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_GREEN + " Time 1" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
 				} else if (primeirovencedor == 2) {
 					rodada2 = 2;
-					pontuacao2 = pontosRodada;
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a primeira rodada.");
 
 				} else if (rodada1 > rodada2) { // Caso mele a primeira rodada, o time que ganhar a próxima rodada
 												// ganhará o ponto.
 					rodada1 = 2;
-					pontuacao1 = pontosRodada;
+					pontuacao1 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_GREEN + " Time 1" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a rodada após a primeira ter melado.");
 				} else if (rodada1 < rodada2) {
 					rodada2 = 2;
-					pontuacao2 = pontosRodada;
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha o ponto por ter ganho a rodada após a primeira ter melado.");
 				}
@@ -458,13 +465,13 @@ public class Truco {
 													// será o vencedor.
 				if (rodada1 > rodada2) {
 					rodada1 = 2;
-					pontuacao1 = pontosRodada;
+					pontuacao1 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_GREEN + " Time 1" + ANSI_RESET
 							+ " ganha a rodada, por ter vencido a única rodada que não melou.");
 
 				} else if (rodada2 > rodada1) {
 					rodada2 = 2;
-					pontuacao2 = pontosRodada;
+					pontuacao2 += pontosRodada;
 					System.out.println("\n\tO" + ANSI_RED + " Time 2" + ANSI_RESET
 							+ " ganha a rodada, por ter vencido a única rodada que não melou.");
 				}
