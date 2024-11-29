@@ -14,34 +14,34 @@ public class Card {
 	public int calculateCardValue() { // Calcula o valor da carta pelo seu número
 		int cardValue;
 		switch (face) {
-		case "As":
+		case "A":
 			cardValue = 8;
 			break;
-		case "Dois":
+		case "2":
 			cardValue = 9;
 			break;
-		case "Tres":
+		case "3":
 			cardValue = 10;
 			break;
-		case "Quatro":
+		case "4":
 			cardValue = 1;
 			break;
-		case "Cinco":
+		case "5":
 			cardValue = 2;
 			break;
-		case "Seis":
+		case "6":
 			cardValue = 3;
 			break;
-		case "Sete":
+		case "7":
 			cardValue = 4;
 			break;
-		case "Dama":
+		case "Q":
 			cardValue = 5;
 			break;
-		case "Valete":
+		case "J":
 			cardValue = 6;
 			break;
-		case "Rei":
+		case "K":
 			cardValue = 7;
 			break;
 		default:
@@ -52,16 +52,16 @@ public class Card {
 		// Verificação de Manilha, caso seja manilha, altera o valor.
 		if (isManilha()) {
 			switch (suit) {
-			case "Copas":
+			case "♥":
 				cardValue = 13;
 				break;
-			case "Ouros":
+			case "♦":
 				cardValue = 11;
 				break;
-			case "Espadas":
+			case "♠":
 				cardValue = 12;
 				break;
-			case "Paus":
+			case "♣":
 				cardValue = 14;
 				break;
 
@@ -91,6 +91,16 @@ public class Card {
 	}
 
 	public String toString() {
-		return face + " de " + suit;
+		return "\t┌─────────────┐\n"
+			 + "\t│ "+ String.format("%-2s",this.face) + "          │\n"
+			 + "\t│             │\n"
+			 + "\t│             │\n"
+
+			 + "\t│      " + this.suit + "      │\n"
+			 + "\t|             │\n"
+			 + "\t│             │\n"
+
+			 + "\t│          " + String.format("%-2s",this.face) + " │\n"
+			 + "\t└─────────────┘\n";
 	}
 }

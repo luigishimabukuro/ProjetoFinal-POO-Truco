@@ -36,13 +36,29 @@ public class Bot {
 		return cards_value;
 	}
 
+	public int jogarCartaF(ArrayList<Card> maodoBot) { // Joga uma carta aleatória do bot.
+		SecureRandom random = new SecureRandom();
+		int escolha = random.nextInt(maodoBot.size());
+		Card cartaEscolhida = maodoBot.remove(escolha);
+		System.out.println("\tO " + name + " jogou \n");
+		System.out.println(cartaVirada());
+		int valorCarta = cartaEscolhida.calculateCardValue();
+		return valorCarta;
+	}
+
 	public int jogarCarta(ArrayList<Card> maodoBot) { // Joga uma carta aleatória do bot.
 		SecureRandom random = new SecureRandom();
 		int escolha = random.nextInt(maodoBot.size());
 		Card cartaEscolhida = maodoBot.remove(escolha);
-		System.out.println("\tO " + name + " jogou " + cartaEscolhida);
+		System.out.println("\tO " + name + " jogou \n" + cartaEscolhida);
 		int valorCarta = cartaEscolhida.calculateCardValue();
 		return valorCarta;
+	}
+
+	public boolean aceitar() {
+		SecureRandom random = new SecureRandom();
+		boolean aceitar = random.nextBoolean();
+		return aceitar;
 	}
 
 	public boolean aceitarTruco() { // Define aleatoriamente se o bot aceita ou não o truco (50/50).
@@ -63,7 +79,7 @@ public class Bot {
 
 	public boolean pedir6() {
 		SecureRandom random = new SecureRandom();
-		double probabilityforTrue = 0.3;
+		double probabilityforTrue = 0.2;
 		double randomValue;
 		randomValue = random.nextDouble();
 		boolean resp = randomValue < probabilityforTrue;
@@ -132,5 +148,44 @@ public class Bot {
 
 	public void reset() { // Limpa a mão do Bot para inserir a nova mão.
 		this.maodoBot.clear();
+	}
+
+	public String printCardsSideBySide(ArrayList<Card> maodoBot) {
+		String[] cardLines = new String[9];
+		System.out.println("\n\n\t\t\t\tMão do " + this.name + "\n\n");
+		for (int i = 0; i < cardLines.length; i++) {
+			cardLines[i] = "";
+		}
+
+		for (Card card : maodoBot) {
+			String[] lines = card.toString().split("\n");
+			for (int i = 0; i < lines.length; i++) {
+				cardLines[i] += lines[i] + " ";
+			}
+		}
+
+		StringBuilder allCards = new StringBuilder();
+		for (String line : cardLines) {
+			allCards.append(line).append("\n");
+		}
+
+		return allCards.toString();
+	}
+
+	public String cartaVirada() {
+		return "\t┌─────────────┐\n" + "\t│             │\n" + "\t│             │\n" + "\t│             │\n"
+				+ "\t│             │\n" + "\t|             │\n" + "\t│             │\n" + "\t│             │\n"
+				+ "\t└─────────────┘\n";
+	}
+
+	public String toString() {
+		String cardstring = "";
+		int i = 1;
+		System.out.println("\n\tMão do " + getName());
+		for (Card card : maodoBot) {
+			cardstring += "[" + i + "] " + card.toString() + "\n";
+			i++;
+		}
+		return cardstring;
 	}
 }

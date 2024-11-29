@@ -19,12 +19,22 @@ public class Deck {
 	}
 
 	public String showVira() {
-		return vira.getFace() + " de " + vira.getSuit();
-	}
+		return		 "\t┌─────────────┐\n"
+				 + "\t\t│ "+ String.format("%-2s",vira.getFace()) + "          │\n"
+				 + "\t\t│             │\n"
+				 + "\t\t│             │\n"
+
+				 + "\t\t│      " + vira.getSuit() + "      │\n"
+				 + "\t\t│             │\n"
+				 + "\t\t│             │\n"
+
+				 + "\t\t│          " + String.format("%-2s",vira.getFace()) + " │\n"
+				 + "\t\t└─────────────┘\n";	
+		}
 
 	public Deck() {
-		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
-		String[] suits = { "Copas", "Ouros", "Paus", "Espadas" };
+		String[] faces = { "A", "2", "3", "4", "5", "6", "7", "J", "Q", "K" };
+		String[] suits = { "♥", "♦", "♠", "♣" };
 
 		deck = new ArrayList<>(NUMBER_OF_CARDS);
 
@@ -36,8 +46,8 @@ public class Deck {
 	}
 
 	public void reset() { // Reseta o baralho e depois embaralha.
-		String[] faces = { "As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Valete", "Dama", "Rei" };
-		String[] suits = { "Copas", "Ouros", "Paus", "Espadas" };
+		String[] faces = { "A", "2", "3", "4", "5", "6", "7", "J", "Q", "K" };
+		String[] suits = { "♥", "♦", "♠", "♣" };
 		vira = null;
 		manilha = null;
 		deck.clear();
@@ -60,35 +70,35 @@ public class Deck {
 
 	public void setManilha(Card vira) { // Define a manilha com base do vira.
 		switch (vira.getFace()) {
-		case "As":
-			manilha = "Dois";
+		case "A":
+			manilha = "2";
 			break;
-		case "Dois":
-			manilha = "Tres";
+		case "2":
+			manilha = "3";
 			break;
-		case "Tres":
-			manilha = "Quatro";
+		case "3":
+			manilha = "4";
 			break;
-		case "Quatro":
-			manilha = "Cinco";
+		case "4":
+			manilha = "5";
 			break;
-		case "Cinco":
-			manilha = "Seis";
+		case "5":
+			manilha = "6";
 			break;
-		case "Seis":
-			manilha = "Sete";
+		case "6":
+			manilha = "7";
 			break;
-		case "Sete":
-			manilha = "Dama";
+		case "7":
+			manilha = "Q";
 			break;
-		case "Dama":
-			manilha = "Valete";
+		case "Q":
+			manilha = "J";
 			break;
-		case "Valete":
-			manilha = "Rei";
+		case "J":
+			manilha = "K";
 			break;
-		case "Rei":
-			manilha = "As";
+		case "K":
+			manilha = "A";
 			break;
 		default:
 			manilha = "pika";
@@ -103,12 +113,12 @@ public class Deck {
 	public static boolean isManilha(Card card) {
 		return card.getFace().equals(manilha);
 	}
-
+	
 	public String toString() {
 		String cardstring = "";
 		int i = 1;
 		for (Card card : deck) {
-			cardstring += "\t[" + i + "] " + card.toString() + "\n";
+			cardstring += "[" + i + "] " + card.toString() + "\n";
 			i++;
 		}
 		return cardstring;
