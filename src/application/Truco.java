@@ -921,8 +921,8 @@ public class Truco {
 											}
 										}
 									} else {
-										System.out.println("\tO Bot recusou o 9, O" + ANSI_RED + " Time 2" + ANSI_RESET
-												+ " ganha a rodada.");
+										System.out.println("\tO seu Companheiro recusou o 9, O" + ANSI_RED + " Time 2"
+												+ ANSI_RESET + " ganha a rodada.");
 										rodada2 = 2;
 										pontuacao2 += pontosRodada;
 										return;
@@ -938,8 +938,8 @@ public class Truco {
 						}
 
 					} else {
-						System.out.println(
-								"\tO Bot recusou o truco. O" + ANSI_RED + " Time 2" + ANSI_RESET + " ganha a rodada.");
+						System.out.println("\tO seu Companheiro recusou o truco. O" + ANSI_RED + " Time 2" + ANSI_RESET
+								+ " ganha a rodada.");
 						rodada2 = 2;
 						pontuacao2 += pontosRodada;
 						return;
@@ -968,8 +968,8 @@ public class Truco {
 									}
 								}
 							} else {
-								System.out.println("\tO Bot recusou o 9, O" + ANSI_RED + " Time 2" + ANSI_RESET
-										+ " ganha a rodada.");
+								System.out.println("\tO seu Companheiro recusou o 9, O" + ANSI_RED + " Time 2"
+										+ ANSI_RESET + " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
 								return;
@@ -983,19 +983,19 @@ public class Truco {
 							aceitar61 = bot2.aceitar6();
 							if (aceitar61) {
 								pontosRodada = 6;
-								pedir92 = bot1.pedir9();
-								if (pedir92) {
-									aceitar91 = bot2.aceitar9();
-									if (aceitar91) {
+								pedir91 = bot2.pedir9();
+								if (pedir91) {
+									aceitar92 = bot1.aceitar9();
+									if (aceitar92) {
 										pontosRodada = 9;
-										pedir122 = bot1.pedir12();
+										pedir122 = bot2.pedir12();
 										if (pedir122) {
 											aceitar121 = bot2.aceitar12();
 											if (aceitar121) {
 												pontosRodada = 12;
 											} else {
-												System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2"
-														+ ANSI_RESET + " ganha a rodada.");
+												System.out.println("\tO seu Companheiro recusou o 12, O" + ANSI_RED
+														+ " Time 2" + ANSI_RESET + " ganha a rodada.");
 												rodada2 = 2;
 												pontuacao2 += pontosRodada;
 												return;
@@ -1010,8 +1010,8 @@ public class Truco {
 									}
 								}
 							} else {
-								System.out.println("\tO Bot recusou o 6, O" + ANSI_RED + " Time 2" + ANSI_RESET
-										+ " ganha a rodada.");
+								System.out.println("\tO seu Companheiro recusou o 6, O" + ANSI_RED + " Time 2"
+										+ ANSI_RESET + " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
 								return;
@@ -1024,8 +1024,8 @@ public class Truco {
 							if (aceitar121) {
 								pontosRodada = 12;
 							} else {
-								System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2" + ANSI_RESET
-										+ " ganha a rodada.");
+								System.out.println("\tO seu Companheiro recusou o 12, O" + ANSI_RED + " Time 2"
+										+ ANSI_RESET + " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
 								return;
@@ -1060,8 +1060,8 @@ public class Truco {
 											if (aceitar121) {
 												pontosRodada = 12;
 											} else {
-												System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2"
-														+ ANSI_RESET + " ganha a rodada.");
+												System.out.println("\tO seu Companheiro recusou o 12, O" + ANSI_RED
+														+ " Time 2" + ANSI_RESET + " ganha a rodada.");
 												rodada2 = 2;
 												pontuacao2 += pontosRodada;
 												return;
@@ -1076,8 +1076,8 @@ public class Truco {
 									}
 								}
 							} else {
-								System.out.println("\tO Bot recusou o 6, O" + ANSI_RED + " Time 2" + ANSI_RESET
-										+ " ganha a rodada.");
+								System.out.println("\tO seu Companheiro recusou o 6, O" + ANSI_RED + " Time 2"
+										+ ANSI_RESET + " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
 								return;
@@ -1107,8 +1107,8 @@ public class Truco {
 									if (aceitar121) {
 										pontosRodada = 12;
 									} else {
-										System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2" + ANSI_RESET
-												+ " ganha a rodada.");
+										System.out.println("\tO seu Companheiro recusou o 12, O" + ANSI_RED + " Time 2"
+												+ ANSI_RESET + " ganha a rodada.");
 										rodada2 = 2;
 										pontuacao2 += pontosRodada;
 										return;
@@ -1592,7 +1592,7 @@ public class Truco {
 										pedir121 = jogador2.pedir12(sc);
 										if (pedir121) {
 											aceitar122 = bot1.aceitar12();
-											if (aceitar121) {
+											if (aceitar122) {
 												pontosRodada = 12;
 											} else {
 												System.out.println("\tO Bot recusou o 12, O" + ANSI_GREEN + " Time 1"
@@ -1603,8 +1603,8 @@ public class Truco {
 											}
 										}
 									} else {
-										System.out.println("\tO Bot recusou o 9, O" + ANSI_RED + " Time 2" + ANSI_RESET
-												+ " ganha a rodada.");
+										System.out.println("\tO Jogador recusou o 9, O" + ANSI_RED + " Time 2"
+												+ ANSI_RESET + " ganha a rodada.");
 										rodada2 = 2;
 										pontuacao2 += pontosRodada;
 										return;
@@ -1650,7 +1650,7 @@ public class Truco {
 									}
 								}
 							} else {
-								System.out.println("\tO Bot recusou o 9, O" + ANSI_RED + " Time 2" + ANSI_RESET
+								System.out.println("\tO Jogador recusou o 9, O" + ANSI_RED + " Time 2" + ANSI_RESET
 										+ " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
@@ -1665,18 +1665,18 @@ public class Truco {
 							aceitar61 = jogador2.aceitar6(sc);
 							if (aceitar61) {
 								pontosRodada = 6;
-								pedir92 = bot1.pedir9();
-								if (pedir92) {
-									aceitar91 = jogador2.aceitar9(sc);
-									if (aceitar91) {
+								pedir91 = jogador2.pedir9(sc);
+								if (pedir91) {
+									aceitar92 = bot2.aceitar9();
+									if (aceitar92) {
 										pontosRodada = 9;
-										pedir122 = bot1.pedir12();
-										if (pedir122) {
-											aceitar121 = jogador2.aceitar12(sc);
+										pedir121 = jogador2.pedir12(sc);
+										if (pedir121) {
+											aceitar122 = bot1.aceitar12();
 											if (aceitar121) {
 												pontosRodada = 12;
 											} else {
-												System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2"
+												System.out.println("\tO Jogador recusou o 12, O" + ANSI_RED + " Time 2"
 														+ ANSI_RESET + " ganha a rodada.");
 												rodada2 = 2;
 												pontuacao2 += pontosRodada;
@@ -1692,7 +1692,7 @@ public class Truco {
 									}
 								}
 							} else {
-								System.out.println("\tO Bot recusou o 6, O" + ANSI_RED + " Time 2" + ANSI_RESET
+								System.out.println("\tO Jogador recusou o 6, O" + ANSI_RED + " Time 2" + ANSI_RESET
 										+ " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
@@ -1706,7 +1706,7 @@ public class Truco {
 							if (aceitar121) {
 								pontosRodada = 12;
 							} else {
-								System.out.println("\tO Bot recusou o 12, O" + ANSI_RED + " Time 2" + ANSI_RESET
+								System.out.println("\tO Jogador recusou o 12, O" + ANSI_RED + " Time 2" + ANSI_RESET
 										+ " ganha a rodada.");
 								rodada2 = 2;
 								pontuacao2 += pontosRodada;
